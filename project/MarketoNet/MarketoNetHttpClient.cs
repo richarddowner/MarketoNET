@@ -11,6 +11,7 @@ namespace MarketoNet
         private MarketoHttpClientSettings settings;
         private HttpClient httpClient;
         private JsonMediaTypeFormatter jsonFormatter;
+        private MarketoBearerToken bearerToken;
 
         public MarketoNetHttpClient() 
             : this(new MarketoHttpClientSettings())
@@ -54,6 +55,19 @@ namespace MarketoNet
             }
         }
 
+        public MarketoBearerToken BearerToken
+        {
+            get { return bearerToken; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                bearerToken = value;
+
+                httpClient.DefaultRequestHeaders.Clear();
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + bearerToken.AccessToken);
+            }
+        }
+
         public void Dispose()
         {
             httpClient.Dispose();
@@ -75,6 +89,11 @@ namespace MarketoNet
             MarketoHttpResponse<MarketoBearerToken> response = await httpResponse.ToMarketoResponseAsync<MarketoBearerToken>();
 
             return response;
-        } 
+        }
+
+        public void SetBearerToken(MarketoBearerToken value)
+        {
+            BearerToken = value;
+        }
     }
 }
