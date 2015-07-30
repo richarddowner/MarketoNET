@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
+using MarketoNet.Response;
 
 namespace MarketoNet
 {
@@ -73,6 +74,11 @@ namespace MarketoNet
             httpClient.Dispose();
         }
 
+        public void SetBearerToken(MarketoBearerToken value)
+        {
+            BearerToken = value;
+        }
+
         public async Task<MarketoHttpResponse<MarketoBearerToken>> Login()
         {
             var values = new Dictionary<string, string>
@@ -91,9 +97,14 @@ namespace MarketoNet
             return response;
         }
 
-        public void SetBearerToken(MarketoBearerToken value)
+        public async Task<MarketoHttpResponse<GetCampaignResponse>> GetCampaign(string campaignId)
         {
-            BearerToken = value;
-        }
+            HttpResponseMessage httpResponse = await httpClient.GetAsync(settings.ApiUri + "campaigns/" + campaignId + ".json");
+
+            MarketoHttpResponse<GetCampaignResponse> response = await httpResponse.ToMarketoResponseAsync<GetCampaignResponse>();
+
+            return response;
+        } 
+
     }
 }

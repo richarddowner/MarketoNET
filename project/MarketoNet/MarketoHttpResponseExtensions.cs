@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using MarketoNet.Response;
 using Newtonsoft.Json;
 
 namespace MarketoNet

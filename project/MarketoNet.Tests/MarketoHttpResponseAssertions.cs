@@ -1,4 +1,5 @@
 ﻿using System;
+using MarketoNet.Response;
 using NUnit.Framework;
 
 namespace MarketoNet.Tests

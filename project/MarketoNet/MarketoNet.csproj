@@ -56,9 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Response\GetCampaignResponse.cs" />
     <Compile Include="MarketoBearerToken.cs" />
     <Compile Include="MarketoHttpClientSettings.cs" />
-    <Compile Include="MarketoHttpResponse.cs" />
+    <Compile Include="Response\MarketoHttpResponse.cs" />
     <Compile Include="MarketoHttpResponseExtensions.cs" />
     <Compile Include="MarketoNetHttpClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

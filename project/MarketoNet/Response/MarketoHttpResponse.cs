@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace MarketoNet
+namespace MarketoNet.Response
 {
     public class MarketoHttpResponse
     {

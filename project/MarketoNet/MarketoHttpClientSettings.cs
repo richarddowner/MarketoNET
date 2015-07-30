@@ -8,10 +8,12 @@ namespace MarketoNet
         private string clientId;
         private string clientSecret;
         private Uri authUri;
+        private Uri apiUri;
 
-        public MarketoHttpClientSettings(string clientId = null, string clientSecret = null, Uri authUri = null)
+        public MarketoHttpClientSettings(string clientId = null, string clientSecret = null, Uri authUri = null, Uri apUri = null)
         {
-            AuthUri = authUri ?? new Uri("https://232-OQW-357.mktorest.com/identity/");
+            AuthUri = authUri ?? new Uri(ConfigurationManager.AppSettings["marketo:authuri"]);
+            ApiUri = apiUri ?? new Uri(ConfigurationManager.AppSettings["marketo:apiuri"]);
 
             ClientId = clientId ?? ConfigurationManager.AppSettings["marketo:clientid"];
             ClientSecret = clientSecret ?? ConfigurationManager.AppSettings["marketo:clientsecret"];
@@ -37,6 +39,16 @@ namespace MarketoNet
             {
                 if (value == null) throw new ArgumentNullException("value");
                 clientSecret = value;
+            }
+        }
+
+        public Uri ApiUri
+        {
+            get { return apiUri; }
+            private set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                apiUri = value;
             }
         }
 

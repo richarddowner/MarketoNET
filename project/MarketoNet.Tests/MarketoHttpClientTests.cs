@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using MarketoNet.Response;
 using NUnit.Framework;
 
 namespace MarketoNet.Tests
@@ -24,6 +25,17 @@ namespace MarketoNet.Tests
             using (MarketoNetHttpClient client = EnsureLoggedIn().Result)
             {
                 Assert.NotNull(client.BearerToken.AccessToken);
+            }
+        }
+
+        [Test]
+        public async Task GetCampaignTest()
+        {
+            using (MarketoNetHttpClient client = EnsureLoggedIn().Result)
+            {
+                MarketoHttpResponse<GetCampaignResponse> response = await client.GetCampaign(campaignId: "1");
+
+                response.AssertOk();
             }
         }
     }
